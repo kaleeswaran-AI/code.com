@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSC Coding Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Monaco Editor -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
+
+    <style>
+
+     body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:#0F172A;
+    color:#F8FAFC;
+}
+
+       .header{
+    background:#111827;
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #38BDF8;
+   
+}
+        .logo{
+            width:100px;
+        }
+
+        .container{
+            display:flex;
+            height:calc(100vh - 70px);
+        }
+
+ .left{
+    width:35%;
+    background:#1E293B;
+    padding:20px;
+    overflow-y:auto;
+    border-right:2px solid #38BDF8;
+}
+
+        .right{
+            width:65%;
+            display:flex;
+            flex-direction:column;
+        }
+
+        #editor{
+            height:60%;
+        }
+
+     .bottom{
+    padding:15px;
+    background:#111827;
+}
+
+textarea{
+    width:100%;
+    background:#0F172A;
+    color:white;
+    border:1px solid #38BDF8;
+    padding:10px;
+    margin-top:10px;
+    border-radius:10px;
+}
+
+        button{
+            padding:10px 20px;
+            margin-top:10px;
+            margin-right:10px;
+            border:none;
+            cursor:pointer;
+            border-radius:5px;
+            font-size:15px;
+        }
+.run-btn{
+    background:#38BDF8;
+    color:white;
+}
+
+.run-btn:hover{
+    background:#0EA5E9;
+    box-shadow:0 0 15px #38BDF8;
+}
+
+.submit-btn{
+    background:#22C55E;
+    color:white;
+}
+
+.submit-btn:hover{
+    box-shadow:0 0 15px #22C55E;
+}
+
+ pre{
+    background:#0B1220;
+    color:#38BDF8;
+    padding:12px;
+    min-height:120px;
+    overflow-x:auto;
+    border-radius:10px;
+    border:1px solid #38BDF8;
+}
+
+        .easy{
+            color:lightgreen;
+        }
+
+        .medium{
+            color:orange;
+        }
+
+        .hard{
+            color:red;
+        }
+    .watermark{
+    position: fixed;
+    bottom: 15px;
+    right: 20px;
+    color: rgba(56,189,248,0.5);
+    font-size: 13px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 0 0 8px rgba(56,189,248,0.3);
+    user-select: none;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+    </style>
+</head>
+
+<body>
+<div class="header">
+
+    <h2 style="color:#38BDF8;margin:0;">
+        🤖 Code.com
+    </h2>
+
+    <a href="/logout"
+       style="
+       background:#EF4444;
+       padding:10px 15px;
+       border-radius:8px;
+       color:white;
+       text-decoration:none;">
+       Logout
+    </a>
+
+</div>
+<div class="container">
+
+    <!-- LEFT SIDE -->
+    <div class="left">
+        <div style="
+background:#111827;
+padding:12px;
+border-radius:10px;
+margin-bottom:20px;
+border:1px solid #38BDF8;
+">
+    <strong style="color:#38BDF8;">🚀 Coding Challenge</strong>
+</div>
+
+        <h2>Problem Statement</h2>
+
+        <p>{{ question }}</p>
+
+        <h3 class="
+        {% if difficulty == 'Easy' %}
+            easy
+        {% elif difficulty == 'Medium' %}
+            medium
+        {% else %}
+            hard
+        {% endif %}
+        ">
+            Difficulty: {{ difficulty }}
+        </h3>
+<h3>Instructions</h3>
+
+<ul>
+    <li>Use Python language only.</li>
+    <li>Use <code>input()</code> to read input.</li>
+    <li>Print only the required output.</li>
+    <li>Do not print any extra text or prompts.</li>
+    <li>Print all text output in UPPERCASE unless the question specifies otherwise.</li>
+</ul>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="right">
+
+        <!-- MONACO EDITOR -->
+        <div id="editor"></div>
+
+        <!-- BOTTOM -->
+        <div class="bottom">
+
+            <h3>Custom Input</h3>
+
+            <textarea id="input" rows="5"></textarea>
+
+            <button class="run-btn" onclick="runCode()">
+                ▶ Run Code
+            </button>
+
+            <button class="submit-btn" onclick="submitCode()">
+                ✅ Submit
+            </button>
+
+            <h3>Output</h3>
+
+            <pre id="output"></pre>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- HIDDEN FORM -->
+<form id="submitForm" action="/submit" method="post" style="display:none;">
+
+    <textarea name="code" id="hiddenCode"></textarea>
+
+</form>
+
+<script>
+
+let editor;
+
+require.config({
+    paths: {
+        vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs'
+    }
+});
+
+require(['vs/editor/editor.main'], function () {
+
+    editor = monaco.editor.create(
+        document.getElementById('editor'),
+        {
+           value: {{ saved_code|tojson }},
+            language: 'python',
+            theme: 'hc-black',
+            fontSize: 16,
+            automaticLayout: true,
+            minimap: {
+                enabled: true
+            }
+        }
+    );console.log("Saved code from Flask:", `{{ saved_code|safe }}`);
+console.log("Editor value:", editor.getValue());
+
+
+
+});   
+// ================= RUN CODE =================
+
+async function runCode(){
+
+    let code = editor.getValue();
+
+    let input = document.getElementById("input").value;
+
+    // Save code to database
+    fetch("/save_code", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+
+        body:
+            "q_id={{ q_id }}" +
+            "&code=" + encodeURIComponent(code)
+
+    });
+    await fetch("/save_code", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body:
+        "q_id={{ q_id }}" +
+        "&code=" + encodeURIComponent(code)
+});
+    // Run the code
+    fetch('/run',{
+
+        method:'POST',
+
+        headers:{
+            'Content-Type':'application/x-www-form-urlencoded'
+        },
+
+        body:
+        'code=' + encodeURIComponent(code)
+        +
+        '&input=' + encodeURIComponent(input)
+
+    })
+
+    .then(response => response.text())
+
+    .then(data => {
+
+        document.getElementById("output").innerText = data;
+
+    });
+
+}
+// ================= SUBMIT CODE =================
+
+async function submitCode(){
+
+    document.getElementById("hiddenCode").value =
+        editor.getValue();
+    await fetch("/save_code", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body:
+        "q_id={{ q_id }}" +
+        "&code=" + encodeURIComponent(editor.getValue())
+});
+
+    document.getElementById("submitForm").submit();
+
+}
+
+</script>
+<div class="watermark">
+    © 2026 Code.com | Developed by Kaleeswaran P
+</div>
+
+</body>
+</html>

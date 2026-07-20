@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Code.com{% endblock %}</title>
+
+    <style>
+        .watermark{
+            position: fixed;
+            bottom: 15px;
+            right: 20px;
+            color: rgba(56,189,248,0.5);
+            font-size: 13px;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+            user-select: none;
+            pointer-events: none;
+            z-index: 9999;
+        }
+    </style>
+
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+{% block content %}{% endblock %}
+
+<div class="watermark">
+    © 2026 Code.com | Developed by Kaleeswaran P
+</div>
+
+</body>
+</html>

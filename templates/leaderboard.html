@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Code.com - Leaderboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            background:#0F172A;
+            color:#F8FAFC;
+        }
+
+        .container{
+            max-width:1000px;
+            margin:50px auto;
+            padding:20px;
+        }
+
+        .title{
+            text-align:center;
+            color:#38BDF8;
+            font-size:42px;
+            text-shadow:0 0 10px #38BDF8;
+            margin-bottom:10px;
+        }
+
+        .subtitle{
+            text-align:center;
+            color:#94A3B8;
+            margin-bottom:30px;
+        }
+
+        .leaderboard{
+            background:#1E293B;
+            border-radius:20px;
+            overflow:hidden;
+            border:1px solid rgba(56,189,248,0.3);
+            box-shadow:0 0 20px rgba(56,189,248,0.15);
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+        }
+
+        th{
+            background:#111827;
+            color:#38BDF8;
+            padding:16px;
+            text-align:left;
+        }
+
+        td{
+            padding:16px;
+            border-bottom:1px solid #334155;
+        }
+
+        tr:hover{
+            background:#273449;
+        }
+
+        .rank{
+            font-weight:bold;
+            color:#38BDF8;
+        }
+
+        .gold{
+            color:#FFD700;
+            font-weight:bold;
+        }
+
+        .silver{
+            color:#C0C0C0;
+            font-weight:bold;
+        }
+
+        .bronze{
+            color:#CD7F32;
+            font-weight:bold;
+        }
+
+        .btn-box{
+            text-align:center;
+            margin-top:25px;
+        }
+
+        .btn{
+            display:inline-block;
+            padding:12px 22px;
+            background:#38BDF8;
+            color:white;
+            text-decoration:none;
+            border-radius:10px;
+            transition:.3s;
+        }
+
+        .btn:hover{
+            background:#0EA5E9;
+            box-shadow:0 0 15px #38BDF8;
+        }
+              .watermark{
+    position: fixed;
+    bottom: 15px;
+    right: 20px;
+    color: rgba(56,189,248,0.5);
+    font-size: 13px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 0 0 8px rgba(56,189,248,0.3);
+    user-select: none;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1 class="title">🏆 Leaderboard</h1>
+
+    <p class="subtitle">
+        Top Performers on Code.com
+    </p>
+
+    <div class="leaderboard">
+
+        <table>
+
+            <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Score</th>
+            </tr>
+
+            {% for name, score in scores %}
+            <tr>
+
+                <td>
+
+                    {% if loop.index == 1 %}
+                        <span class="gold">🥇 #1</span>
+
+                    {% elif loop.index == 2 %}
+                        <span class="silver">🥈 #2</span>
+
+                    {% elif loop.index == 3 %}
+                        <span class="bronze">🥉 #3</span>
+
+                    {% else %}
+                        <span class="rank">#{{ loop.index }}</span>
+
+                    {% endif %}
+
+                </td>
+
+                <td>{{ name }}</td>
+
+                <td>{{ score }}</td>
+
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+    <div class="btn-box">
+
+        <a href="/" class="btn">
+            ⬅ Back to Login
+        </a>
+
+    </div>
+
+</div>
+<div class="watermark">
+    © 2026 Code.com | Developed by Kaleeswaran P
+</div>
+
+</body>
+</html>
+

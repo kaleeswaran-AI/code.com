@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Code.com - Results</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            background:#0F172A;
+            color:#F8FAFC;
+            padding:40px;
+        }
+
+        .container{
+            max-width:1100px;
+            margin:auto;
+        }
+
+        .score-card{
+            background:#1E293B;
+            padding:30px;
+            border-radius:20px;
+            text-align:center;
+            border:1px solid rgba(56,189,248,0.3);
+            box-shadow:0 0 20px rgba(56,189,248,0.15);
+            margin-bottom:30px;
+        }
+
+        .score-card h1{
+            color:#38BDF8;
+            font-size:40px;
+            text-shadow:0 0 10px #38BDF8;
+            margin-bottom:10px;
+        }
+
+        .score-card p{
+            color:#94A3B8;
+            font-size:18px;
+        }
+
+        .badge{
+            font-size:60px;
+            margin-bottom:15px;
+        }
+
+        .table-box{
+            background:#1E293B;
+            border-radius:20px;
+            overflow:hidden;
+            border:1px solid rgba(56,189,248,0.2);
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+        }
+
+        th{
+            background:#111827;
+            color:#38BDF8;
+            padding:15px;
+        }
+
+        td{
+            padding:15px;
+            border-bottom:1px solid #334155;
+        }
+
+        tr:hover{
+            background:#273449;
+        }
+
+        .pass{
+            color:#22C55E;
+            font-weight:bold;
+        }
+
+        .fail{
+            color:#EF4444;
+            font-weight:bold;
+        }
+
+        .buttons{
+            margin-top:25px;
+            text-align:center;
+        }
+
+        .btn{
+            display:inline-block;
+            margin:10px;
+            padding:12px 22px;
+            background:#38BDF8;
+            color:white;
+            text-decoration:none;
+            border-radius:10px;
+            transition:.3s;
+        }
+
+        .btn:hover{
+            background:#0EA5E9;
+            box-shadow:0 0 15px #38BDF8;
+        }
+
+        .title{
+            color:#38BDF8;
+            margin-bottom:15px;
+        }
+              .watermark{
+    position: fixed;
+    bottom: 15px;
+    right: 20px;
+    color: rgba(56,189,248,0.5);
+    font-size: 13px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 0 0 8px rgba(56,189,248,0.3);
+    user-select: none;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="score-card">
+
+        {% if passed == total %}
+            <div class="badge">🏆</div>
+        {% elif passed >= total//2 %}
+            <div class="badge">🥈</div>
+        {% else %}
+            <div class="badge">📚</div>
+        {% endif %}
+
+        <h1>{{ passed }} / {{ total }}</h1>
+
+        <p>
+            Test Cases Passed
+        </p>
+
+    </div>
+
+    <h2 class="title">
+        🚀 Test Case Results
+    </h2>
+
+    <div class="table-box">
+
+        <table>
+
+            <tr>
+                <th>#</th>
+                <th>Input</th>
+                <th>Expected</th>
+                <th>Your Output</th>
+                <th>Status</th>
+            </tr>
+
+            {% for r in results %}
+            <tr>
+
+                <td>{{ loop.index }}</td>
+
+                <td>{{ r.input }}</td>
+
+                <td>{{ r.expected }}</td>
+
+                <td>{{ r.output }}</td>
+
+                <td class="{{ 'pass' if r.pass else 'fail' }}">
+                    {{ 'PASS' if r.pass else 'FAIL' }}
+                </td>
+
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+    <div class="buttons">
+
+        <a href="/exam" class="btn">
+            📚 More Questions
+        </a>
+
+        <a href="/leaderboard" class="btn">
+            🏆 Leaderboard
+        </a>
+
+    </div>
+
+</div>
+<div class="watermark">
+    © 2026 Code.com | Developed by Kaleeswaran P
+</div>
+
+</body>
+</html>
+

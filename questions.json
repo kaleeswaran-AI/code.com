@@ -1,0 +1,321 @@
+[
+  {
+    "question": "Reverse a number",
+    "difficulty": "Easy",
+    "tests": [["123", "321"], ["456", "654"]]
+  },
+  {
+    "question": "Check palindrome number",
+    "difficulty": "Easy",
+    "tests": [["121", "PALINDROME"], ["123", "NOT PALINDROME"]]
+  },
+  {
+    "question": "Find factorial",
+    "difficulty": "Easy",
+    "tests": [["3", "6"], ["5", "120"]]
+  },
+  {
+    "question": "Print Fibonacci series up to N terms",
+    "difficulty": "Easy",
+    "tests": [["5", "0 1 1 2 3"], ["7", "0 1 1 2 3 5 8"]]
+  },
+  {
+    "question": "Check if a number is prime",
+    "difficulty": "Easy",
+    "tests": [["7", "PRIME"], ["8", "NOT PRIME"]]
+  },
+  {
+    "question": "Find greatest of three numbers",
+    "difficulty": "Easy",
+    "tests": [["2\n5\n3", "5"], ["10\n7\n15", "15"]]
+  },
+  {
+    "question": "Calculate simple interest",
+    "difficulty": "Easy",
+    "tests": [["1000\n2\n5", "100"], ["2000\n3\n10", "600"]]
+  },
+  {
+    "question": "Find area of a circle (use 3.14)",
+    "difficulty": "Easy",
+    "tests": [["2", "12.56"], ["3", "28.26"]]
+  },
+  {
+    "question": "Convert Celsius to Fahrenheit",
+    "difficulty": "Easy",
+    "tests": [["0", "32.0"], ["100", "212.0"]]
+  },
+  {
+    "question": "Find the reverse of the number",
+    "difficulty": "Easy",
+    "tests": [["123", "321"], ["897", "798"]]
+  },
+{
+    "question": "Write a program to check whether a number is odd or even.",
+    "difficulty": "Easy",
+    "tests": [
+        ["4", "EVEN"],
+        ["7", "ODD"],
+        ["10", "EVEN"],
+        ["15", "ODD"],
+        ["0", "EVEN"],
+        ["99", "ODD"],
+        ["100", "EVEN"]
+    ]
+},
+{
+  "question":"Sum of the series 1-2+3-4......+-n",
+  "difficulty":"Easy",
+  "tests":[["4","-2"],["7","4"]]
+},
+
+  {
+    "question": "Print numbers from 1 to N",
+    "difficulty": "Easy",
+    "tests": [["5", "1 2 3 4 5"], ["3", "1 2 3"]]
+  },
+
+  {
+    "question": "Find sum of first N natural numbers",
+    "difficulty": "Easy",
+    "tests": [["5", "15"], ["10", "55"]]
+  },
+
+  {
+    "question": "Find sum of odd numbers from 1 to N",
+    "difficulty": "Easy",
+    "tests": [["10", "25"], ["5", "9"]]
+  },
+
+  {
+    "question": "Count digits in a number",
+    "difficulty": "Easy",
+    "tests": [["12345", "5"], ["987", "3"]]
+  },
+  {
+    "question": "Find sum of digits",
+    "difficulty": "Easy",
+    "tests": [["123", "6"], ["567", "18"]]
+  },
+  {
+    "question": "Find largest digit in a number",
+    "difficulty": "Easy",
+    "tests": [["5284", "8"], ["9371", "9"]]
+  },
+  {
+    "question": "Count vowels in a string",
+    "difficulty": "Easy",
+    "tests": [["apple", "2"], ["education", "5"]]
+  },
+  {
+    "question": "Convert a string to uppercase",
+    "difficulty": "Easy",
+    "tests": [["hello", "HELLO"], ["python", "PYTHON"]]
+  },
+  {
+    "question": "Check whether a string is palindrome",
+    "difficulty": "Easy",
+    "tests": [["madam", "PALINDROME"], ["apple", "NOT PALINDROME"]]
+  },
+  {
+    "question": "Count the number of words in a sentence",
+    "difficulty": "Moderate",
+    "tests": [["I LOVE PYTHON", "3"], ["WELCOME TO CODE COM", "4"]]
+  },
+  {
+    "question": "Find the length of a string",
+    "difficulty": "Easy",
+    "tests": [["HELLO", "5"], ["PYTHON", "6"]]
+  },
+  {
+    "question": "Check whether a character is a vowel",
+    "difficulty": "Easy",
+    "tests": [["A", "VOWEL"], ["Z", "NOT VOWEL"]]
+  },
+  {
+    "question": "Find the largest number in a list",
+    "difficulty": "Moderate",
+    "tests": [["1 5 3 9 2", "9"], ["10 7 15 6", "15"]]
+  },
+  {
+    "question": "Find the smallest number in a list",
+    "difficulty": "Moderate",
+    "tests": [["5 8 2 9", "2"], ["12 18 4 10", "4"]]
+  },
+  {
+    "question": "Count the number of unique elements in a list",
+    "difficulty": "Moderate",
+    "tests": [["1 2 2 3 3 4", "4"], ["5 5 5 5", "1"]]
+  },
+  {
+    "question": "Find the length of a tuple",
+    "difficulty": "Easy",
+    "tests": [["1 2 3 4", "4"], ["10 20", "2"]]
+  },
+  {
+    "question": "Check whether a key exists in a dictionary",
+    "difficulty": "Moderate",
+    "tests": [
+      ["name:JOHN,age:20\nNAME", "FOUND"],
+      ["city:CHENNAI,pin:600001\nSTATE", "NOT FOUND"]
+    ]
+  },
+  {
+    "question":"Check the given age is major or minor",
+    "difficulty":"Easy",
+    "tests":[["20","MAJOR"],["14","MINOR"]]
+  },
+  
+  {
+    "question": "Find the GCD of two numbers",
+    "difficulty": "Moderate",
+    "tests": [["12\n18","6"],["25\n15","5"]]
+  },
+  {
+    "question": "Find the LCM of two numbers",
+    "difficulty": "Moderate",
+    "tests": [["4\n6","12"],["8\n12","24"]]
+  },
+  {
+    "question": "Check whether a number is an Armstrong number",
+    "difficulty": "Moderate",
+    "tests": [["153","ARMSTRONG"],["125","NOT ARMSTRONG"]]
+  },
+  {
+    "question": "Check whether a number is a Perfect Number",
+    "difficulty": "Moderate",
+    "tests": [["6","PERFECT"],["10","NOT PERFECT"]]
+  },
+  {
+    "question": "Check whether a number is a Strong Number",
+    "difficulty": "Moderate",
+    "tests": [["145","STRONG"],["123","NOT STRONG"]]
+  },
+  {
+    "question": "Convert a decimal number to binary",
+    "difficulty": "Moderate",
+    "tests": [["10","1010"],["7","111"]]
+  },
+  {
+    "question": "Convert a binary number to decimal",
+    "difficulty": "Moderate",
+    "tests": [["1010","10"],["111","7"]]
+  },
+  {
+    "question": "Find the HCF of three numbers",
+    "difficulty": "Hard",
+    "tests": [["12\n18\n24","6"],["8\n16\n32","8"]]
+  },
+  {
+    "question": "Check whether two strings are anagrams",
+    "difficulty": "Moderate",
+    "tests": [["listen\nsilent","ANAGRAM"],["apple\nhello","NOT ANAGRAM"]]
+  },
+  {
+    "question": "Count frequency of each character in a string",
+    "difficulty": "Hard",
+    "tests": [["aab","a:2 b:1"],["abc","a:1 b:1 c:1"]]
+  },
+  {
+    "question": "Remove duplicate characters from a string",
+    "difficulty": "Moderate",
+    "tests": [["programming","progamin"],["banana","ban"]]
+  },
+  {
+    "question": "Replace all spaces with hyphen",
+    "difficulty": "Easy",
+    "tests": [["HELLO WORLD","HELLO-WORLD"],["CODE COM","CODE-COM"]]
+  },
+  {
+    "question": "Find the second largest element in a list",
+    "difficulty": "Moderate",
+    "tests": [["1 5 8 4","5"],["10 40 20 30","30"]]
+  },
+  {
+    "question": "Remove duplicates from a list",
+    "difficulty": "Moderate",
+    "tests": [["1 2 2 3 3","1 2 3"],["5 5 5","5"]]
+  },
+  {
+    "question": "Merge two lists",
+    "difficulty": "Moderate",
+    "tests": [["1 2\n3 4","1 2 3 4"],["5\n6 7","5 6 7"]]
+  },
+  {
+    "question": "Find common elements in two lists",
+    "difficulty": "Hard",
+    "tests": [["1 2 3\n2 3 4","2 3"],["5 6\n7 8",""]]
+  },
+  {
+    "question": "Rotate a list left by one position",
+    "difficulty": "Moderate",
+    "tests": [["1 2 3 4","2 3 4 1"],["5 6","6 5"]]
+  },
+  {
+    "question": "Rotate a list right by one position",
+    "difficulty": "Moderate",
+    "tests": [["1 2 3 4","4 1 2 3"],["5 6","6 5"]]
+  },
+  {
+    "question": "Transpose a 2x2 matrix",
+    "difficulty": "Hard",
+    "tests": [["1 2\n3 4","1 3\n2 4"],["5 6\n7 8","5 7\n6 8"]]
+  },
+  {
+    "question": "Find the sum of the main diagonal of a 2x2 matrix",
+    "difficulty": "Hard",
+    "tests": [["1 2\n3 4","5"],["5 6\n7 8","13"]]
+  },
+  {
+    "question": "Reverse the order of words in a sentence",
+    "difficulty": "Moderate",
+    "tests": [["I LOVE PYTHON","PYTHON LOVE I"],["CODE COM","COM CODE"]]
+  },
+  {
+    "question": "Find the longest word in a sentence",
+    "difficulty": "Moderate",
+    "tests": [["I LOVE PROGRAMMING","PROGRAMMING"],["WELCOME TO PYTHON","WELCOME"]]
+  },
+  {
+    "question": "Count consonants in a string",
+    "difficulty": "Easy",
+    "tests": [["APPLE","3"],["PYTHON","6"]]
+  },
+  {
+    "question": "Print the first N prime numbers",
+    "difficulty": "Hard",
+    "tests": [["5","2 3 5 7 11"],["3","2 3 5"]]
+  },
+  {
+    "question": "Find the nth Fibonacci number",
+    "difficulty": "Moderate",
+    "tests": [["6","8"],["8","21"]]
+  },
+  {
+    "question": "Check whether a number is a Harshad number",
+    "difficulty": "Hard",
+    "tests": [["18","YES"],["19","NO"]]
+  },
+  {
+    "question": "Find the median of a list",
+    "difficulty": "Hard",
+    "tests": [["1 2 3 4 5","3"],["2 4 6 8","5.0"]]
+  },
+  {
+    "question": "Count the occurrence of each word in a sentence",
+    "difficulty": "Hard",
+    "tests": [["CAT DOG CAT","CAT:2 DOG:1"],["A B A B","A:2 B:2"]]
+  },
+  {
+    "question": "Sort dictionary keys alphabetically",
+    "difficulty": "Hard",
+    "tests": [["b:2,a:1","a b"],["z:1,m:2","m z"]]
+  },
+  {
+    "question": "Find the missing number from 1 to N",
+    "difficulty": "Hard",
+    "tests": [["5\n1 2 4 5","3"],["4\n2 3 4","1"]]
+  }
+]
+
+
+ 
