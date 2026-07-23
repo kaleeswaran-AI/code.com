@@ -21,3 +21,4 @@ Werkzeug==3.1.5
 Flask
 gunicorn
 psycopg2-binary==2.9.10
+bcrypt==4.3.0
