@@ -1,8 +1,7 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Code.com Login</title>
+    <title>🤖Code.com Login</title>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,139 +10,152 @@
 
     <style>
 
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:'Poppins',sans-serif;
-        }
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:'Poppins',sans-serif;
+    }
 
-        body{
-            min-height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            background:#0F172A;
-            color:#F8FAFC;
-        }
+    body{
+        min-height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:#0F172A;
+        color:#F8FAFC;
+    }
 
-        .container{
-            width:420px;
-            background:#1E293B;
-            padding:40px;
-            border-radius:20px;
-            border:1px solid rgba(56,189,248,0.3);
-            box-shadow:0 0 30px rgba(56,189,248,0.2);
-        }
+    .container{
+        width:420px;
+        background:#1E293B;
+        padding:40px;
+        border-radius:20px;
+        border:1px solid rgba(56,189,248,.3);
+        box-shadow:0 0 30px rgba(56,189,248,.2);
+    }
 
-        .logo{
-            text-align:center;
-            margin-bottom:10px;
-        }
+    .logo{
+        text-align:center;
+        margin-bottom:10px;
+    }
 
-        .logo h1{
-            color:#38BDF8;
-            font-size:42px;
-            text-shadow:0 0 10px #38BDF8;
-        }
+    .logo h1{
+        color:#38BDF8;
+        font-size:42px;
+        text-shadow:0 0 10px #38BDF8;
+    }
 
-        .tagline{
-            text-align:center;
-            color:#94A3B8;
-            margin-bottom:30px;
-            font-size:14px;
-        }
+    .tagline{
+        text-align:center;
+        color:#94A3B8;
+        margin-bottom:30px;
+        font-size:14px;
+    }
 
-        h3{
-            color:#38BDF8;
-            margin-bottom:15px;
-            text-align:center;
-        }
+    h3{
+        text-align:center;
+        color:#38BDF8;
+        margin-bottom:20px;
+    }
 
-        input{
-            width:100%;
-            padding:12px;
-            margin-bottom:15px;
-            border:none;
-            outline:none;
-            border-radius:10px;
-            background:#0F172A;
-            color:white;
-            border:1px solid #334155;
-            font-size:15px;
-        }
+    input{
+        width:100%;
+        padding:12px;
+        margin-bottom:15px;
+        border:none;
+        outline:none;
+        border-radius:10px;
+        background:#0F172A;
+        color:white;
+        border:1px solid #334155;
+        font-size:15px;
+    }
 
-        input:focus{
-            border-color:#38BDF8;
-            box-shadow:0 0 10px rgba(56,189,248,0.4);
-        }
+    input:focus{
+        border-color:#38BDF8;
+        box-shadow:0 0 10px rgba(56,189,248,.4);
+    }
 
-        button{
-            width:100%;
-            padding:12px;
-            border:none;
-            border-radius:10px;
-            cursor:pointer;
-            font-size:15px;
-            font-weight:600;
-            transition:0.3s;
-            margin-bottom:10px;
-        }
+    button{
+        width:100%;
+        padding:12px;
+        border:none;
+        border-radius:10px;
+        background:#38BDF8;
+        color:white;
+        font-size:15px;
+        font-weight:600;
+        cursor:pointer;
+        transition:.3s;
+    }
 
-        .login-btn{
-            background:#38BDF8;
-            color:white;
-        }
+    button:hover{
+        background:#0EA5E9;
+        box-shadow:0 0 15px #38BDF8;
+    }
 
-        .login-btn:hover{
-            background:#0EA5E9;
-            box-shadow:0 0 15px #38BDF8;
-        }
+    hr{
+        border:none;
+        border-top:1px solid #334155;
+        margin:25px 0;
+    }
 
-        .register-btn{
-            background:#22C55E;
-            color:white;
-        }
+    .signup{
+        text-align:center;
+        color:#94A3B8;
+    }
 
-        .register-btn:hover{
-            box-shadow:0 0 15px #22C55E;
-        }
+    .signup a{
+        color:#38BDF8;
+        text-decoration:none;
+        font-weight:600;
+    }
 
-        hr{
-            border:none;
-            border-top:1px solid #334155;
-            margin:25px 0;
-        }
+    .footer{
+        text-align:center;
+        margin-top:20px;
+        color:#94A3B8;
+        font-size:12px;
+    }
+    #loader{
+    display:none;
+    margin-left:8px;
+    animation:spin 1s linear infinite;
+    }
 
-        .footer{
-            text-align:center;
-            margin-top:15px;
-            color:#94A3B8;
-            font-size:12px;
-        }
-        .watermark{
-    position: fixed;
-    bottom: 15px;
-    right: 20px;
-    color: rgba(56,189,248,0.5);
-    font-size: 13px;
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif;
-    text-shadow: 0 0 8px rgba(56,189,248,0.3);
-    user-select: none;
-    pointer-events: none;
-    z-index: 9999;
+    @keyframes spin{
+    from{
+        transform:rotate(0deg);
+    }
+    to{
+        transform:rotate(360deg);
+    }
 }
 
     </style>
+
 </head>
+<script>
+
+document.querySelector("form").addEventListener("submit", function(){
+
+    document.getElementById("btnText").innerHTML="Logging in...";
+
+    document.getElementById("loader").style.display="inline-block";
+
+    document.getElementById("loginBtn").disabled=true;
+
+});
+
+</script>
 
 <body>
 
 <div class="container">
 
     <div class="logo">
-        <h1>Code.com</h1>
+        <h1>🤖Code.com</h1>
     </div>
 
     <div class="tagline">
@@ -155,11 +167,11 @@
     <form action="/login" method="post">
 
         <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            required
-        >
+    type="text"
+    name="login"
+    placeholder="Username or Email"
+    required
+>
 
         <input
             type="password"
@@ -168,59 +180,28 @@
             required
         >
 
-        <button
-            type="submit"
-            class="login-btn"
-        >
-            Login
+       <button type="submit" id="loginBtn">
+        <span id="btnText">Login</span>
+        <span id="loader" style="display:none;">⏳</span>
         </button>
 
     </form>
 
     <hr>
 
-    <h3>Create Account</h3>
+    <div class="signup">
+        New to Code.com?<br><br>
 
-    <form action="/register" method="post">
-
-        <input
-            type="text"
-            name="username"
-            placeholder="New Username"
-            required
-        >
-
-        <input
-            type="password"
-            name="password"
-            placeholder="New Password"
-            required
-        >
-
-        <button
-            type="submit"
-            class="register-btn"
-        >
-            Register
-        </button>
-
-    </form>
+        <a href="/signup">
+            Create an Account
+        </a>
+    </div>
 
     <div class="footer">
         © 2026 Code.com • Learn • Build • Innovate
     </div>
 
-
-
-
-
-<div class="watermark">
-    © 2026 Code.com | Developed by Kaleeswaran P
 </div>
 
 </body>
 </html>
-
-</body>
-</html>
-

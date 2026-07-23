@@ -1,51 +1,36 @@
 from flask import Flask, render_template, request, redirect, session
 import io
 import sys
-import sqlite3
+import psycopg2
 import threading
 import json
+import bcrypt
 
 app = Flask(__name__)
 app.secret_key = "secret123"
 
 # ================= DATABASE =================
 
-conn = sqlite3.connect("exam.db", check_same_thread=False)
+
+import psycopg2
+
+def get_db():
+    return psycopg2.connect(
+        host="aws-0-ap-northeast-1.pooler.supabase.com",
+        database="postgres",
+        user="postgres.pbtgvumdbelzhcmexkhi",
+        password="kaleeswaran@13",
+        port=5432,
+        sslmode="require"
+    )
+
+
+conn = get_db()
 cursor = conn.cursor()
 
-# USERS TABLE
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS users(
-    username TEXT PRIMARY KEY,
-    password TEXT,
-    status TEXT DEFAULT 'active'
-)
-""")
 
-# ADD STATUS COLUMN IF OLD TABLE EXISTS
-try:
-    cursor.execute("ALTER TABLE users ADD COLUMN status TEXT DEFAULT 'active'")
-except:
-    pass
 
-# PROGRESS TABLE
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS progress(
-    username TEXT,
-    question_id INTEGER
-)
-""")
-# USER CODE TABLE
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS user_code(
-    username TEXT,
-    question_id INTEGER,
-    code TEXT,
-    PRIMARY KEY(username, question_id)
-)
-""")
 
-conn.commit()
 
 conn.commit()
 
@@ -60,50 +45,76 @@ with open("questions.json", "r") as f:
 def home():
     return render_template("login.html")
 
+
+@app.route('/signup')
+def signup():
+    return render_template("signup.html")
+
 # ================= REGISTER =================
 
 @app.route('/register', methods=['POST'])
 def register():
 
     username = request.form['username']
+    email = request.form['email']
     password = request.form['password']
+
+    hashed_password = bcrypt.hashpw(
+    password.encode('utf-8'),
+    bcrypt.gensalt()
+    ).decode('utf-8')
 
     try:
         cursor.execute("""
-        INSERT INTO users(username,password,status)
-        VALUES(?,?,?)
-        """, (username, password, "active"))
+        INSERT INTO users(username,email,password,status)
+        VALUES(%s,%s,%s,%s)
+        """, (username, email, hashed_password, "active"))
 
         conn.commit()
 
         return redirect("/")
 
-    except:
-        return "User already exists"
+    except Exception as e:
+        conn.rollback()
+
+        if "users_pkey" in str(e):
+            return "Username already exists."
+
+        elif "users_email_key" in str(e):
+            return "Email already registered."
+
+        else:
+            return f"Database Error: {e}"
 
 # ================= LOGIN =================
 
 @app.route('/login', methods=['POST'])
 def login():
 
-    username = request.form['username']
+    login = request.form['login']
     password = request.form['password']
 
     cursor.execute("""
-    SELECT username,password,status
+    SELECT username, password, status
     FROM users
-    WHERE username=? AND password=?
-    """, (username, password))
+    WHERE username=%s OR email=%s
+    """, (login, login))
 
     user = cursor.fetchone()
 
     if user:
 
-        # COMPLETED CHECK
+        if not bcrypt.checkpw(
+            password.encode('utf-8'),
+            user[1].encode('utf-8')
+        ):
+            return "Invalid Login"
+
+    # COMPLETED CHECK
         if user[2] == "completed":
             return "🎓 Course already completed. Access blocked."
 
-        session['user'] = username
+        session['user'] = user[0]
 
         return redirect("/exam")
 
@@ -122,7 +133,7 @@ def exam():
     cursor.execute("""
     SELECT question_id
     FROM progress
-    WHERE username=?
+    WHERE username=%s
     """, (session['user'],))
 
     completed = [row[0] for row in cursor.fetchall()]
@@ -145,7 +156,7 @@ def exam():
         cursor.execute("""
         UPDATE users
         SET status='completed'
-        WHERE username=?
+        WHERE username=%s
         """, (session['user'],))
 
         conn.commit()
@@ -177,7 +188,7 @@ def question(q_id):
     cursor.execute("""
     SELECT code
     FROM user_code
-    WHERE username=? AND question_id=?
+    WHERE username=%s AND question_id=%s
     """, (session['user'], q_id))
 
     row = cursor.fetchone()
@@ -362,7 +373,7 @@ def submit():
         cursor.execute("""
         SELECT *
         FROM progress
-        WHERE username=? AND question_id=?
+        WHERE username=%s AND question_id=%s
         """, (session['user'], q_id))
 
         already_done = cursor.fetchone()
@@ -371,10 +382,10 @@ def submit():
 
             cursor.execute("""
             INSERT INTO progress(username,question_id)
-            VALUES(?,?)
+            VALUES(%s,%s)
             """, (session['user'], q_id))
 
-            conn.commit()
+        conn.commit()
 
     return render_template(
         "result.html",
@@ -401,21 +412,19 @@ def certificate():
 @app.route('/save_code', methods=['POST'])
 def save_code():
 
-    if 'user' not in session:
-        return "Login required"
-
     q_id = request.form['q_id']
     code = request.form['code']
 
     cursor.execute("""
-    INSERT OR REPLACE INTO user_code(username, question_id, code)
-    VALUES (?, ?, ?)
+    INSERT INTO user_code(username, question_id, code)
+    VALUES (%s, %s, %s)
+    ON CONFLICT (username, question_id)
+    DO UPDATE SET code = EXCLUDED.code
     """, (session['user'], q_id, code))
 
     conn.commit()
 
     return "Saved"
-
 # ================= LOGOUT =================
 
 @app.route('/logout')
@@ -441,7 +450,70 @@ def leaderboard():
         "leaderboard.html",
         scores=scores
     )
+# ================= PROFILE =================
 
+@app.route('/profile')
+def profile():
+
+    if 'user' not in session:
+        return redirect("/")
+
+    # Get user details
+    cursor.execute("""
+    SELECT username, email, status
+    FROM users
+    WHERE username=%s
+    """, (session['user'],))
+
+    user = cursor.fetchone()
+
+    # Count completed questions
+    cursor.execute("""
+    SELECT COUNT(*)
+    FROM progress
+    WHERE username=%s
+    """, (session['user'],))
+
+    completed = cursor.fetchone()[0]
+
+    # Total questions
+    total = len(questions)
+
+    # Progress percentage
+    percent = int((completed / total) * 100)
+
+    # Leaderboard ranking
+    cursor.execute("""
+    SELECT username, COUNT(question_id) AS score
+    FROM progress
+    GROUP BY username
+    ORDER BY score DESC
+    """)
+
+    scores = cursor.fetchall()
+
+    rank = "Not Ranked"
+
+    for i, row in enumerate(scores, start=1):
+        if row[0] == session['user']:
+            rank = i
+            break
+
+    # Certificate status
+    if percent == 100:
+        certificate = "Unlocked 🏆"
+    else:
+        certificate = "Locked 🔒"
+
+    return render_template(
+        "profile.html",
+        user=user,
+        completed=completed,
+        total=total,
+        percent=percent,
+        rank=rank,
+        certificate=certificate
+    )
 # ================= START =================
 
 if __name__ == "__main__":

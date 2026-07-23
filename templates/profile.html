@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>My Profile | Code.com</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins',sans-serif;
+        }
+
+        body{
+            background:#0F172A;
+            color:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:100vh;
+        }
+
+        .container{
+    width:90%;
+    max-width:1200px;
+    min-height:85vh;
+    background:#1E293B;
+    padding:40px;
+    border-radius:20px;
+    border:1px solid rgba(56,189,248,.3);
+    box-shadow:0 0 25px rgba(56,189,248,.2);
+}
+
+        h1{
+            text-align:center;
+            color:#38BDF8;
+            margin-bottom:25px;
+        }
+
+        p{
+            margin:12px 0;
+            font-size:17px;
+        }
+
+        .progress-bar{
+            width:100%;
+            height:20px;
+            background:#334155;
+            border-radius:20px;
+            overflow:hidden;
+            margin-top:10px;
+        }
+
+        .progress-fill{
+            height:100%;
+            background:#38BDF8;
+            width:{{ percent }}%;
+            transition:.5s;
+        }
+
+        hr{
+            border:none;
+            border-top:1px solid #334155;
+            margin:25px 0;
+        }
+        .buttons{
+    margin-top:30px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.buttons a{
+    text-decoration:none;
+}
+
+.buttons button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.learn{
+    background:#38BDF8;
+    color:white;
+}
+
+.learn:hover{
+    background:#0EA5E9;
+}
+
+.leaderboard{
+    background:#F59E0B;
+    color:white;
+}
+
+.leaderboard:hover{
+    background:#D97706;
+}
+
+.logout{
+    background:#EF4444;
+    color:white;
+}
+
+.logout:hover{
+    background:#DC2626;
+}
+.cards{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin:25px 0;
+}
+
+.card{
+    background:#0F172A;
+    border:1px solid rgba(56,189,248,.3);
+    border-radius:15px;
+    padding:20px;
+    text-align:center;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 0 15px rgba(56,189,248,.3);
+}
+
+.card h3{
+    color:#94A3B8;
+    font-size:15px;
+    margin-bottom:10px;
+}
+
+.card h2{
+    color:#38BDF8;
+    font-size:28px;
+}
+.welcome{
+    background:linear-gradient(135deg,#38BDF8,#0EA5E9);
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:25px;
+    text-align:center;
+    color:white;
+}
+
+.welcome h2{
+    margin-bottom:8px;
+}
+
+.welcome p{
+    font-size:14px;
+}
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>My Profile</h1>
+    <div class="welcome">
+    <h2>Welcome, {{ user[0] }} 👋</h2>
+    <p>Keep learning and improve your coding skills every day.</p>
+</div>
+
+    <p><b>👤 Username:</b> {{ user[0] }}</p>
+
+    <p><b>📧 Email:</b> {{ user[1] }}</p>
+
+    <p><b>📌 Status:</b> {{ user[2] }}</p>
+
+    <hr>
+
+ <div class="cards">
+
+    <div class="card">
+        <h3>Completed</h3>
+        <h2>{{ completed }}/{{ total }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>Progress</h3>
+        <h2>{{ percent }}%</h2>
+    </div>
+
+    <div class="card">
+        <h3>Rank</h3>
+        <h2>{{ rank }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>Certificate</h3>
+        <h2>{{ certificate }}</h2>
+    </div>
+
+</div>
+
+<div class="progress-bar">
+    <div class="progress-fill"></div>
+</div>
+
+<hr>
+
+<div class="buttons">
+
+    <a href="/exam">
+        <button class="learn">
+            🚀 Continue Learning
+        </button>
+    </a>
+
+    <a href="/leaderboard">
+        <button class="leaderboard">
+            🏆 Leaderboard
+        </button>
+    </a>
+
+    <a href="/logout">
+        <button class="logout">
+            🚪 Logout
+        </button>
+    </a>
+
+</div>
+
+</body>
+
+</html>
