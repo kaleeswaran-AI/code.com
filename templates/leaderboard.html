@@ -22,7 +22,7 @@
 
         .container{
             max-width:1000px;
-            margin:50px auto;
+            margin:40px auto;
             padding:20px;
         }
 
@@ -121,11 +121,112 @@
     pointer-events: none;
     z-index: 9999;
 }
+.navbar{
+    width:100%;
+    height:70px;
+    background:#1E293B;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 30px;
+    border-bottom:1px solid rgba(56,189,248,.3);
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    color:#38BDF8;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    gap:15px;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:white;
+    padding:10px 20px;
+    border-radius:10px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.home-btn{
+    background:#22C55E;
+}
+
+.home-btn:hover{
+    background:#16A34A;
+}
+
+.profile-btn{
+    background:#3B82F6;
+}
+
+.profile-btn:hover{
+    background:#2563EB;
+}
+
+.leaderboard-btn{
+    background:#F59E0B;
+}
+
+.leaderboard-btn:hover{
+    background:#D97706;
+}
+
+.logout-btn{
+    background:#EF4444;
+}
+
+.logout-btn:hover{
+    background:#DC2626;
+}
+.current-user{
+    background:#2563EB !important;
+    color:white;
+    font-weight:bold;
+}
+
+.current-user td{
+    color:white;
+}
 
     </style>
 </head>
 
 <body>
+    
+
+<div class="navbar">
+
+    <div class="logo">
+        💻 Code.com
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/exam" class="home-btn">
+            🏠 Home
+        </a>
+
+        <a href="/profile" class="profile-btn">
+            👤 Profile
+        </a>
+
+        
+
+        <a href="/logout" class="logout-btn">
+            🚪 Logout
+        </a>
+
+    </div>
+
+</div>
 
 <div class="container">
 
@@ -146,7 +247,7 @@
             </tr>
 
             {% for name, score in scores %}
-            <tr>
+            <tr class="{% if name == current_user %}current-user{% endif %}">
 
                 <td>
 
@@ -177,14 +278,7 @@
 
     </div>
 
-    <div class="btn-box">
-
-        <a href="/" class="btn">
-            ⬅ Back to Login
-        </a>
-
-    </div>
-
+   
 </div>
 <div class="watermark">
     © 2026 Code.com | Developed by Kaleeswaran P

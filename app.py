@@ -434,6 +434,7 @@ def logout():
 
     return redirect("/")
 @app.route('/leaderboard')
+@app.route("/leaderboard")
 def leaderboard():
 
     cursor.execute("""
@@ -446,9 +447,12 @@ def leaderboard():
 
     scores = cursor.fetchall()
 
+    current_user = session.get("user")
+
     return render_template(
         "leaderboard.html",
-        scores=scores
+        scores=scores,
+        current_user=current_user
     )
 # ================= PROFILE =================
 
